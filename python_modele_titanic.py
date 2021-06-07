@@ -62,7 +62,7 @@ Ypredict = pickled_model.predict(df)
         
 if Ypredict == 1:
     st.write("Le résultat :")
-    col1, mid, col2 = st.beta_columns([1,1,100])
+    col1, mid, col2 = st.beta_columns([1,1,200])
     with col1:
         st.image('images/gg.jpg', width=200)
     with col2:
@@ -71,7 +71,7 @@ if Ypredict == 1:
 
 else:
     st.write("Le résultat :")
-    col1, mid, col2 = st.beta_columns([1,1,100])
+    col1, mid, col2 = st.beta_columns([1,1,200])
     with col1:
         st.image('images/rip.jpg', width=200)
     with col2:

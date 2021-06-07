@@ -17,7 +17,7 @@ Envie de savoir si vous auriez survécu au Titanic ? Plutôt Rose ou Jack ?
 """)
 
 
-st.sidebar.image('images/titanic.jpg', width=300)
+st.sidebar.image(r'images/titanic.jpg', width=300)
 
 sexe_lbl = st.sidebar.selectbox('Homme ou Femme ?', ["Homme", "Femme"])
 richesse_lbl = st.sidebar.selectbox('Riche, moyen ou pauvre ?', ["Riche","Moyen", "Pauvre"])
@@ -53,9 +53,8 @@ st.write("Ce modèle est fiable à 78% ")
 
 data = {'Pclass':[Pclass],'Sex':[sexe],'Age':[age]}
 df = pd.DataFrame(data=data)
-
 df.dropna(axis=0, inplace=True)
-df['Sex'].replace(['male', 'female'], [0, 1], inplace=True)
+
 
 Ypredict = pickled_model.predict(df)  
 

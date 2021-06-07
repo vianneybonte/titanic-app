@@ -37,7 +37,7 @@ else :
     Pclass = 3
 
 
-Pkl_Filename = r"C:\Users\viann\Desktop\PYTHON\titanic\streamlit\model_titanic.pkl"  
+Pkl_Filename = r"model_titanic.pkl"  
 
 
 # Load the Model back from file

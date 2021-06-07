@@ -17,7 +17,7 @@ Envie de savoir si vous auriez survécu au Titanic ? Plutôt Rose ou Jack ?
 """)
 
 
-
+st.sidebar.image('images/titanic.jpg', width=300)
 
 sexe_lbl = st.sidebar.selectbox('Homme ou Femme ?', ["Homme", "Femme"])
 richesse_lbl = st.sidebar.selectbox('Riche, moyen ou pauvre ?', ["Riche","Moyen", "Pauvre"])

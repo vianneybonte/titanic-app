@@ -1,6 +1,8 @@
 import pandas as pd
 import pickle
 import streamlit as st
+from sklearn.preprocessing import MinMaxScaler
+
 
 st.set_page_config(
   page_title="Titanic app",
@@ -22,6 +24,9 @@ st.sidebar.image(r'images/titanic.jpg', width=300)
 sexe_lbl = st.sidebar.selectbox('Homme ou Femme ?', ["Homme", "Femme"])
 richesse_lbl = st.sidebar.selectbox('Riche, moyen ou pauvre ?', ["Riche","Moyen", "Pauvre"])
 age = st.sidebar.slider('Quel âge avez vous ?', 1, 110, 1, 1)
+famille = st.sidebar.slider('Combien de menbre de votre famille à aider ?', 1, 6, 1, 1)
+fare = st.sidebar.slider('Prix de votre ticket ?', 1, 250, 1, 1)
+
 
 if sexe_lbl =="Homme":
     sexe = 0
@@ -51,12 +56,26 @@ pickled_model
 st.write("Ce modèle est fiable à 78% ")
 
 
-data = {'Pclass':[Pclass],'Sex':[sexe],'Age':[age]}
+
+
+
+data = {'pclass':[Pclass],'sex':[sexe],'age':[age], 'sibsp':[famille], 'fare':[fare]}
 df = pd.DataFrame(data=data)
+
+
+
+df = MinMaxScaler().fit_transform(df)
+print(df)
+
+df = pd.DataFrame(df, columns = ['pclass', 'sex', 'age', 'sibsp', 'fare'])
+
+
 df.dropna(axis=0, inplace=True)
 
 
 Ypredict = pickled_model.predict(df)  
+
+
 
 
         

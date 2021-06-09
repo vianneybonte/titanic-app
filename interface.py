@@ -23,7 +23,7 @@ st.sidebar.image(r'images/titanic.jpg', width=300)
 sexe_lbl = st.sidebar.selectbox('Homme ou Femme ?', ["Homme", "Femme"])
 richesse_lbl = st.sidebar.selectbox('Riche, moyen ou pauvre ?', ["Riche","Moyen", "Pauvre"])
 age = st.sidebar.slider('Quel âge avez vous ?', 1, 110, 1, 1)
-famille = st.sidebar.slider('Combien de menbre de votre famille à aider ?', 1, 6, 1, 1)
+famille = st.sidebar.slider('Combien de membre de votre famille à aider ?', 1, 6, 1, 1)
 fare = st.sidebar.slider('Prix de votre ticket ?', 1, 250, 1, 1)
 
 if sexe_lbl =="Homme":
@@ -44,20 +44,23 @@ Pkl_Filename = r"modele_knn_80.pkl"
 with open(Pkl_Filename, 'rb') as file:  
     pickled_model = pickle.load(file)
 
+def scaler_perso(x, min , max) :
+    y = x / max
+    return y 
+
+richesse_lbl_std = scaler_perso(Pclass, 1,3)
+age_std = scaler_perso(age, 0.5,82)
+famille_std = scaler_perso(famille, 0,5)
+fare_std = scaler_perso(fare, 0,250)
 
 st.write("Le modèle utilisé :")
 pickled_model
 
 st.write("Ce modèle est fiable à 80% ")
 
-data = {'pclass':[Pclass],'sex':[sexe],'age':[age], 'sibsp':[famille], 'fare':[fare]}
+
+data = {'pclass':[richesse_lbl_std],'sex':[sexe],'age':[age_std], 'sibsp':[famille_std], 'fare':[fare_std]}
 df = pd.DataFrame(data=data)
-
-df = MinMaxScaler().fit_transform(df)
-
-df = pd.DataFrame(df, columns = ['pclass', 'sex', 'age', 'sibsp', 'fare'])
-
-df.dropna(axis=0, inplace=True)
 
 Ypredict = pickled_model.predict(df)  
 
